@@ -1,0 +1,55 @@
+<div [hidden]="!submitted" class="alert alert-success" role="alert">
+    Stream added
+</div>
+
+<div [hidden]="!error" class="alert alert-danger" role="alert">
+    An error occurred: {{ errorMsg }}
+</div>
+<br />
+<form #streamForm="ngForm" [hidden]="submitted">
+
+    <div class="form-group">
+        <label for="id">Stream ID</label>
+        <input type="text" class="form-control" placeholder="ID" [(ngModel)]="stream.id" name="id">
+    </div>
+    <div class="form-group">
+        <label for="name">Stream name</label>
+        <input type="text" class="form-control" placeholder="Name" [(ngModel)]="stream.name" name="name">
+    </div>
+    <div class="form-group">
+        <label for="description">Stream description</label>
+        <input type="text" class="form-control" placeholder="Description" [(ngModel)]="stream.description" name="description">
+    </div>
+
+    <div class="card mt-4" *ngFor="let mount of stream.mounts; let i = index" [attr.data-index]="i">
+        <div class="card-body">
+            <div class="card-title">Mountpoint #{{ i+1 }}</div>
+
+            <div class="form-group">
+                <label for="path">Path</label>
+                <input type="text" class="form-control" placeholder="Path" [(ngModel)]="mount.path" name="path_{{ i }}">
+            </div>
+            <div class="form-group">
+                <label for="fileschema">File schema</label>
+                <input type="text" class="form-control" placeholder="Fileschema" [(ngModel)]="mount.fileschema" name="fileschema_{{ i }}">
+            </div>
+            <div class="form-group">
+                <label for="resolution">Resolution</label>
+                <input type="text" class="form-control" placeholder="Resolution" [(ngModel)]="mount.resolution" name="resolution_{{ i }}">
+            </div>
+            <div class="form-group">
+                <label for="bitrate">Bitrate</label>
+                <input type="text" class="form-control" placeholder="Bitrate" [(ngModel)]="mount.bitrate" name="bitrate_{{ i }}">
+            </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" [(ngModel)]="mount.legacy" name="legacy_{{ i }}">
+                <label for="legacy" class="form-check-label">Legacy stream</label>
+            </div>
+        </div>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary" (click)="addMount()">Add mountpoint</button>&nbsp;
+    <button type="submit" class="btn btn-primary" (click)="removeMount()">Remove mountpoint</button>&nbsp;
+    <button type="submit" class="btn btn-primary" (click)="addStream()">Submit</button>
+
+</form>

@@ -1,0 +1,18 @@
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Watch stream</th>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let stream of streams">
+            <th><a class="btn btn-primary" href="#" role="button" routerLink="/watch/{{ stream.id }}">Play</a></th>
+            <th>{{ stream.id }}</th>
+            <td>{{ stream.name }}</td>
+            <td>{{ stream.description }}</td>
+        </tr>
+    </tbody>
+</table>
