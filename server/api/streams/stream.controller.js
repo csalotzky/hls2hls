@@ -134,36 +134,36 @@ function getStreamSegment(req, res) {
                     function(err, user) {
                         if (err) {
                             // Unknown error
-                            res.status(403).send('Error while checking token');
+                            res.status(403).json('Error while checking token');
                         } else if (user !== null) {
                             // VALID TOKEN -> CHECK WHETHER USER HAS ALREADY DOWNLOADED THE CHUNK
                             StreamHostHelper.userHasChunk(user.uuid, chunk[0], chunk[1], chunk[2]).exec(
                                 function(err, sameuser) {
                                     if (err) {
                                         // Unknown error
-                                        res.status(403).send('Error while checking token');
+                                        res.status(403).json('Error while checking token');
                                     } else {
                                         if (!user.length) {
                                             // USER WITH THE SAME CHUNK WAS NOT FOUND -> VALID REQUEST, CHECK WHETHER THE SERVER HAS FREE UPLOAD SLOT
                                             StreamHostHelper.isUploadSlotAvailableCallback(chunk, function(err, available) {
                                                 if (err) {
                                                     // Unknown error
-                                                    res.status(403).send('Unknown error');
+                                                    res.status(403).json('Unknown error');
                                                 } else if (available) {
                                                     // UPLOAD SLOT AVAILABLE -> DOWNLOAD CHUNK
                                                     res.download(path.join(config.mediaPath, chunk[0], chunk[1], chunk[2]));
                                                 } else {
-                                                    res.status(403).send('No free upload resource available. Download chunk via P2P!');
+                                                    res.status(403).json('No free upload resource available. Download chunk via P2P!');
                                                 }
                                             });
                                         } else {
-                                            res.status(403).send('Chunk has already been downloaded');
+                                            res.status(403).json('Chunk has already been downloaded');
                                         }
                                     }
                                 }
                             )
                         } else {
-                            res.status(403).send('Invalid or missing token');
+                            res.status(403).json('Invalid or missing token');
                         }
                     });
             }

@@ -47,11 +47,6 @@ export function adminTokenGetter() {
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    VgCoreModule,
-    VgControlsModule,
-    VgOverlayPlayModule,
-    VgBufferingModule,
-    VgStreamingModule,
     SocketIoModule.forRoot(config),
     JwtModule.forRoot({
       config: {
