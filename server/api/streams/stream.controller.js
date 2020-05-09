@@ -130,8 +130,8 @@ function getStreamSegment(req, res) {
                 res.download(path.join(config.mediaPath, chunk[0], chunk[1], chunk[2]));
             } else {
                 // CHECK IF TOKEN IS VALID
-                StreamHostHelper.getUserFromToken(req.headers.authorization.replace('Bearer ', '')).exec(
-                    function(err, user) {
+                if (req.headers.authorization !== 'undefined') {
+                    StreamHostHelper.getUserFromToken(req.headers.authorization.replace('Bearer ', '')).exec(function(err, user) {
                         if (err) {
                             // Unknown error
                             res.status(403).json('Error while checking token');
@@ -163,9 +163,12 @@ function getStreamSegment(req, res) {
                                 }
                             )
                         } else {
-                            res.status(403).json('Invalid or missing token');
+                            res.status(403).json('Invalid token');
                         }
                     });
+                } else {
+                    res.status(403).json('Missing token');
+                }
             }
         }
     });
