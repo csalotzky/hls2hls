@@ -199,8 +199,8 @@ export class PeerService {
             this.socket.ioSocket.on('signal', socketListener);
 
             // Terminate session if timeout
-            var connectionTimeout = setTimeout(function(){ callback('WebRTC Connection timeout', null); }, 5000)
-            var dataTimeout = setTimeout(function(){ callback('WebRTC Data timeout', null); }, 20000)
+            var connectionTimeout = setTimeout(function(){ callback('WebRTC Connection timeout', null); }, 6000)
+            var dataTimeout = setTimeout(function(){ callback('WebRTC Data timeout', null); }, 30000)
 
             // Destroy tasks
             function endSession() {

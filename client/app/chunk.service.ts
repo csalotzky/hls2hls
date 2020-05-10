@@ -129,9 +129,11 @@ export class ChunkService {
             console.log("CHUNKSERVICE: WebRTC communcation failed. Trying to get legacy chunk...");
             ref.getChunkBlobLegacy(chnk, function(err, blob){
               if (!err) {
-                // DON'T store in chunks array, DON'T make ack 
+                // DON'T make ack 
+                chnk.FallBack = true;
+                chnk.BlobData = blob;
                 ref.addStatSource(blob.size, 'fromLegacy');
-                callback(URL.createObjectURL(blob));
+                callback(URL.createObjectURL(chnk.BlobData));
               } else {
                 console.error(err);
                 callback(URL.createObjectURL(new Blob()));

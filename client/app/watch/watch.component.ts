@@ -52,7 +52,7 @@ export class WatchComponent implements OnInit {
         this.destroy = () => loader.destroy();
         this.load = (context, config, callbacks) => {
           //If something fatal happening (chunkservice dont call back) -> set timeout and terminate loader session
-          setTimeout(() => loader.load(context, config, callbacks), 30000);
+          setTimeout(() => loader.load(context, config, callbacks), 45000);
  
           // update local chunks
           globalChunkService.updateChunksArray(function(){

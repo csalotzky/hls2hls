@@ -130,7 +130,7 @@ function getStreamSegment(req, res) {
                 res.download(path.join(config.mediaPath, chunk[0], chunk[1], chunk[2]));
             } else {
                 // CHECK IF TOKEN IS VALID
-                if (req.headers.authorization !== 'undefined') {
+                if (req.headers.authorization) {
                     StreamHostHelper.getUserFromToken(req.headers.authorization.replace('Bearer ', '')).exec(function(err, user) {
                         if (err) {
                             // Unknown error
